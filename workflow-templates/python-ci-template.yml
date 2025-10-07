@@ -1,0 +1,30 @@
+name: Pythonayo CI Template
+
+description: |
+  Standard Python continuous integration workflow with linting and tests.
+  Use this template to quickly set up CI for Python projects.
+
+inputs:
+  python-version:
+    description: Python version to use
+    default: '3.10'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Lint
+      run: pip install flake8 && flake8 .
+
+    - name: Run Tests
+      run: pytest
