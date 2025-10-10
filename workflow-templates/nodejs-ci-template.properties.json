@@ -2,6 +2,6 @@
   "name": "Node CI",
   "description": "Ayo Supply Chain Organization internal CI workflow template.",
   "iconName": "example-icon",
-  "categories": ["Deployment","_Ayo","Continuous Integration"],
+  "categories": ["JavaScript","Deployment","_Ayo","Continuous Integration"],
   "filePatterns": ["*","package.json$", "^Dockerfile", ".*\\.md$"]
 }
