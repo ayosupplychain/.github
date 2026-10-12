@@ -1,0 +1,25 @@
+name: Golden Python CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+jobs:
+  build:
+    uses: ayosupplychain/org-workflows/.github/workflows/golden-build.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    with:
+      app-name: ${{ github.event.repository.name }}
+
+  governance:
+    if: github.event_name == 'push'
+    uses: ayosupplychain/org-workflows/.github/workflows/governance-scan.yml@v1
+    permissions:
+      contents: read
+      actions: read
+      security-events: write

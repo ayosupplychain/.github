@@ -1,0 +1,12 @@
+{
+  "name": "Golden Python CI",
+  "description": "Opt-in Python CI using the organization golden build, supply-chain attestations, and default-branch governance scan. Requires requirements.txt and pytest.",
+  "iconName": "octicon workflow",
+  "categories": [
+    "Python",
+    "continuous-integration"
+  ],
+  "filePatterns": [
+    "^requirements\\.txt$"
+  ]
+}

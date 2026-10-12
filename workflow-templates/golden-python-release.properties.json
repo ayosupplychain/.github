@@ -1,0 +1,12 @@
+{
+  "name": "Golden Python Release",
+  "description": "Opt-in Python release through the organization golden build and gated staging/production deploy workflows. Requires the configured environments and runner groups.",
+  "iconName": "octicon rocket",
+  "categories": [
+    "Python",
+    "deployment"
+  ],
+  "filePatterns": [
+    "^requirements\\.txt$"
+  ]
+}

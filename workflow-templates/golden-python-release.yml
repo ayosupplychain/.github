@@ -1,0 +1,42 @@
+name: Golden Python Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      change-request:
+        description: ServiceNow change number required for production (CHG followed by 7 digits)
+        required: true
+        type: string
+
+jobs:
+  build:
+    uses: ayosupplychain/org-workflows/.github/workflows/golden-build.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    with:
+      app-name: ${{ github.event.repository.name }}
+
+  staging:
+    needs: build
+    uses: ayosupplychain/org-workflows/.github/workflows/golden-deploy.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+      attestations: read
+    with:
+      environment: staging
+      artifact-name: ${{ needs.build.outputs.artifact-name }}
+
+  production:
+    needs: [build, staging]
+    uses: ayosupplychain/org-workflows/.github/workflows/golden-deploy.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+      attestations: read
+    with:
+      environment: production
+      artifact-name: ${{ needs.build.outputs.artifact-name }}
+      change-request: ${{ inputs.change-request }}
